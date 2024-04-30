@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Receitas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-warning">
+    <div class="container-fluid">
+        <h1>Catálogo de Receitas</h1>
+
+        <div id="pnlCatalogo" class="d-flex flex-wrap"></div>
+    </div>
+
+    <script>
+        const receitas = [
+            {
+                titulo: "Sanduiche",
+                imagem: "imagens.receitas/sanduiche.avif",
+                preparo: "Corte a cebola em 4 partes (corte em cruz),Pincele as cebolas cortadas com o molho Barbecue,Em uma frigideira quente, adicione um fio de azeite e coloque as fatias da cebola até que fiquem douradas e reserve, Com a frigideira ainda quente, adicione um fio de azeite, coloque as fatias de rosbife, adicione sal epimenta. Após 2 minutos, adicione o queijo sobre a carne, tampe e deixe derreter, Corte o pão, coloque um fio de azeite no interior e sele-o na frigideira. Deixe dourar até atingir o ponto desejado. Retire. Adicione Hellmann's Supreme nas duas partes do pão, Adicione a rúcula, a cebola caramelizada e o repolho fatiado por cima, Na outra fatia do pão, adicione o rosbife com o queijo derretido",
+                ingredientes: ["1 pão ciabatta", "150 gramas de rosbife", "4 fatias de queijo prato", "1 cebola", "1 colher de sopa de barbecue", "Repolho roxo ralado a gosto", "rúcula a gosto", "2 colheres de sopa de maionese"]
+            },
+            {
+                titulo: "Chips Simples",
+                imagem: "imagens.receitas/chips.avif",
+                preparo: "Em uma panela de pressão, coloque o óleo e leve ao fogo alto para aquecer, Junte a carne já temperada com o sal e frite por todos os lados até ficar bem dourada, Regue com água, fecha a panela e coloque por cima a carne desfiada e deixe cozinhar em fogo médio, por 30 minutos após o início da fervura, Desligue o fogo da panela, espere a pressão ceder, desfie a carne e reserve, Disponha a Batata Ruffles Original numa travessa, cubra com a carne desfiada e finalize a receita com a Maionese Hellmanns Churrasco. Sirva em seguida. ",
+                ingredientes: ["300 gramas de carne moida", "1/2 colher de chá de sal", "2 colheres de sopa de óleo", "600 ml de água",
+                "1 saco de batata ruffles", "4 colheres de sopa de maionese"]
+            },
+            {
+                titulo: "Burrito",
+                imagem: "imagens.receitas/burrito.avif",
+                preparo: "Coloque os Nuggets Sadia na cesta da airfryer, pré-aquecida a 180 °C, por 15 minutos, ou até que fiquem dourados, Em cada pão tipo tortilha coloque os pedaços de Nuggets Sadia, cubra com a Maionese Hellmanns, polvilhe o cheiro-verde, a acelga e os tomatinhos, Enrole, no formato de um burrito e sirva em seguida.",
+                ingredientes: ["300 gramas de nuggets", "2 pães tipo tortilha", "4 colheres de sopa de maionese", "1 colher de sopa de cheiro-verde picado", "2 folhas de acelga picadas", "1 tomate cortade em cubos pequenos"]
+            }
+            
+        ];
+
+        function getListaIngredientes(ingredientes) {
+            return `<ul>${ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join('')}</ul>`;
+        }
+
+        function getCard(receita) {
+            return `
+                <div class="card" style="width: 250px; margin: 10px;">
+                    <img src="${receita.imagem}" class="card-img-top" alt="Imagem da Receita">
+                    <div class="card-body">
+                        <h5 class="card-title">${receita.titulo}</h5>
+                        <div class="card-text">
+                            ${getListaIngredientes(receita.ingredientes)}
+                            <hr>
+                            ${receita.preparo}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function preencheCatalogo() {
+            const pnlCatalogo = document.getElementById('pnlCatalogo');
+            const htmlReceitas = receitas.map(receita => getCard(receita)).join('');
+            pnlCatalogo.innerHTML = htmlReceitas;
+        }
+
+        window.onload = preencheCatalogo;
+    </script>
+</body>
+</html>
